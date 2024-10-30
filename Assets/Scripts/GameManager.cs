@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public int Health { get { return health; } }
-    private int health = 6;
+    private int health = 100;
     public GameObject player;
+    private int puntos = 0;
+    public Image healthBar;
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -18,5 +22,11 @@ public class GameManager : MonoBehaviour
             Destroy(player);
             SceneManager.LoadScene("Main Menu");
         }
+        healthBar.fillAmount = health / 100f;
+    }
+    public void AddPoints(int points)
+    {
+        puntos = puntos + points;
+        Debug.Log("Puntos: " + puntos);
     }
 }
